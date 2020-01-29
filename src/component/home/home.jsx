@@ -1,11 +1,11 @@
 import React from 'react';
-import NavigationHome from '../NavHome/NavHome';
+import Navigation from '../Navbar/Navbar';
 
 function home(props) {
   return (
     <div >
     {
-      <NavigationHome/>
+      <Navigation/>
     }
     
     </div>

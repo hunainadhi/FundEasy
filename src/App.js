@@ -4,8 +4,8 @@ const home = lazy(() => import('./component/home/home'));
 const departmentview = lazy(() => import('./component/department/departmentview'));
 const schemeview = lazy(() => import('./component/schemes/schemeview'));
 const state_dept = lazy(() => import('./component/state_dept/state_dept'));
-const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
-const AddModify = lazy(() => import('./component/AddModify/AddModify'));
+//const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
+const AddModify = lazy(() => import('./component/AddModify/Add'));
 const NAvigationHome = lazy(() => import('./component/NavHome/NavHome'));
 function App() {
 	return (
@@ -16,7 +16,7 @@ function App() {
 					<Route path="/department" exact component={departmentview} />
 					<Route path="/schemes" exact component={schemeview} />
 					<Route path="/state_dept" exact component={state_dept} />
-					<Route path="/sendFunds" exact component={sendFunds} />
+					{/*<Route path="/sendFunds" exact component={sendFunds} />*/}
 					<Route path="/AddModify" exact component={AddModify} />
 					<Route path="/Navbar" exact component={home} />					
 				</Switch>

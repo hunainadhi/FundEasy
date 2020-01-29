@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Notification from '../Notification/Notification';
+import Login from'../login/login';
 import './NavHome.css';
 const NavigationHome = props => {
 	const [collapsed, setCollapsed] = useState(true);
@@ -16,8 +17,8 @@ const NavigationHome = props => {
 					<Nav>
 						
 						<NavItem>
-							<NavLink style={{ color: 'white' }} href="/">
-								LOGIN
+							<NavLink >
+								<Login/>
 							</NavLink>	
 						</NavItem>
 						

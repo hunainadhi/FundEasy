@@ -1,20 +1,4 @@
-.navbar-expand-md{
-    background-color: black;
-    height: 80px;
-}
-.navbar-brand{
-    font-size:42px;
-    font-weight: bolder;
-}
-.nav-link{
-    font-size: 20px;
-    margin-right: 20px;
-    margin-left: -15px;
-    cursor: pointer;
-}
-.nav{
-    margin-left: 440px;
-}
+
 
 .Submit{
     background-color: #EA4B32;
