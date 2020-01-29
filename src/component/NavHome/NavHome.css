@@ -1,0 +1,17 @@
+.navbar-expand-md{
+    background-color: black;
+    height: 80px;
+}
+.navbar-brand{
+    font-size:42px;
+    font-weight: bolder;
+}
+.nav-link{
+    font-size: 20px;
+    margin-right: 20px;
+    margin-left: -15px;
+}
+.nav{
+    margin-left: 1000px;
+}
+

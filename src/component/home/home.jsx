@@ -1,9 +1,11 @@
 import React from 'react';
-//import Login from '../login/login';
+import NavigationHome from '../NavHome/NavHome';
+
 function home(props) {
   return (
     <div >
-    {//Midhi your job will be in home component}
+    {
+      <NavigationHome/>
     }
     </div>
   );
