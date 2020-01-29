@@ -1,12 +1,31 @@
-import React from 'react';
+import React,{useContext, useState, useEffect} from 'react';
 import './send_funds.css';
 import Web3 from 'web3';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
 import Navbar from '../Navbar/Navbar';
+import { UserContext } from '../../UserContext';
 
 const sendFunds = () => {
     let senderId, receiverId, schemeId, receiver1, receiver2, receiver3, contract, newLen, balance;
+    const [user, setUser]  = useContext(UserContext);
+    useEffect(()=>{
+        fetch('http://localhost:5000/user/login', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setUser(user);
+                console.log(data);
+                if (data.Token) {
+                    console.log(data);
+                }
+            });
+    },[])
 
     function startApp() {
         let abi = [
@@ -123,9 +142,9 @@ const sendFunds = () => {
         let web3 = new Web3('http://localhost:8545');
         contract = new web3.eth.Contract(abi, fundsAddress);
         senderId = "0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee";
-        receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
-        receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
-        receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
+       // receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
+        //receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
+        //receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
         newLen = 0;
         schemeId = "Universal Health Insurance Scheme";
 
@@ -248,29 +267,27 @@ const sendFunds = () => {
         return address;
     }
     function sendEmail(amount,dept,scheme,email) {
-        var nodemailer = require('nodemailer');
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'kbohra89@gmail.com',
-                pass: 'rabtizaebvftujgd'
-            }
-        });
-
-        var mailOptions = {
-            from: 'kbohra89@gmail.com',
-            to: email,
-            subject: 'Notification about Fund Receipt',
-            body: "Dear Officer,<br><br>" + dept + " has received " + amount + " for " + scheme,
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
+        const notification = {
+            _id: new mongoose.Types.ObjectId(),
+		//sender: req.body.sender,
+		receiver: email,
+		amount: amount,
+		time: Date(),
+		schemeID:schemeID,
+        }
+        fetch('http://localhost:5000/notification', {
+				method: 'POST',
+				body: JSON.stringify(notification),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+				
+				});
+        
     }
 
     function sendTransaction() {
