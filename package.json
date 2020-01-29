@@ -18,6 +18,7 @@
     "react-treefold": "^1.0.0",
     "react-window": "^1.8.5",
     "reactstrap": "^8.4.0",
+    "serialize-javascript": "^2.1.2",
     "sweetalert2": "^9.6.0",
     "web3": "^1.2.5-rc.0"
   },
