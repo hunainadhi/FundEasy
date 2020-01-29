@@ -15,16 +15,16 @@ const NavigationHome = props => {
 				<NavbarToggler onClick={toggleNavbar}/>
 				<Collapse isOpen={!collapsed} navbar >
 					<Nav>
-						
 						<NavItem>
-							<NavLink >
-								<Login/>
+							<NavLink onClick={toggleNavbar} >
+							Login	
 							</NavLink>	
 						</NavItem>
 						
 					</Nav>
 				</Collapse>
 			</Navbar>
+			{!	collapsed && <Login/>}
 		</div>
 	);
 };
