@@ -23,7 +23,7 @@ function App() {
 					<Route path="/AddModify" exact component={AddModify} />
 					<Route path="/Navbar" exact component={Navbar} />					
 					<Route path="/sendFunds" exact component={sendFunds} />
-					<Route path="/Navbar" exact component={Navbar}/>
+
 					<Route path="/requestFunds" exact component={requestFunds}/>
 				</Switch>
 			</Suspense>
