@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Navbar from '../Navbar/Navbar';
 import { UserContext } from '../../UserContext';
 
-const sendFunds = () => {
+const SendFunds = () => {
     let senderId, receiverId, schemeId, receiver1, receiver2, receiver3, contract, newLen, balance;
     const [user, setUser]  = useContext(UserContext);
     useEffect(()=>{
@@ -268,12 +268,11 @@ const sendFunds = () => {
     }
     function sendEmail(amount,dept,scheme,email) {
         const notification = {
-            _id: new mongoose.Types.ObjectId(),
 		//sender: req.body.sender,
 		receiver: email,
 		amount: amount,
 		time: Date(),
-		schemeID:schemeID,
+		schemeID:scheme,
         }
         fetch('http://localhost:5000/notification', {
 				method: 'POST',
@@ -377,4 +376,4 @@ const sendFunds = () => {
     );
 };
 
-export default sendFunds;
+export default SendFunds;

@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react';
 import './login.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-//import Department from '../department/departmentview';
-//import { Redirect } from 'react-router-dom';
+import Department from '../department/departmentview';
+import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
+import Swal from 'sweetalert2';
 
 const Login = props => {
 	const [email, setemail] = useState('');
 	const [password, setpass] = useState('');
 	 const [user, setUser]  = useContext(UserContext);
-	
+	const [isloggedin,setlog] = useState(false);
 	function onsubmit(){
+		
 		
 		const user = {
 			email: email,
@@ -31,6 +33,21 @@ const Login = props => {
 					console.log(data);
 					if (data.Token) {
 						console.log(data);
+						Swal.fire({
+							icon: 'success',
+							text:'You are logged in!'}
+						  ).then((result)=>{
+							  if(result.value){
+								setlog(true);
+							  }
+						  })
+						
+					}
+					else{
+						Swal.fire({
+							icon: 'error',
+							text:'Incorrect Email or Password!'}
+						  )
 					}
 				});
 
@@ -45,7 +62,15 @@ const Login = props => {
 		} else {
 		//	return <Alert color="info">Incorrect login details</Alert>;
 		*/
+
+	
+
+if(isloggedin){
+	return(<Redirect to="/Navbar" />);
+}
+else{ 
 	return (
+		
 		<div className="layout">
 			<h1 style={{ textAlign: 'center', color: 'lavender', fontFamily: 'cursive' }}>LOGIN</h1>
 			<hr />
@@ -82,6 +107,7 @@ const Login = props => {
 			</Form>
 		</div>
 	);
+}
 };
 
 export default Login;
