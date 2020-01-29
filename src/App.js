@@ -6,6 +6,7 @@ const schemeview = lazy(() => import('./component/schemes/schemeview'));
 const state_dept = lazy(() => import('./component/state_dept/state_dept'));
 const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
 const Navbar = lazy(()=> import('./component/Navbar/Navbar'));
+const requestFunds = lazy(() => import('./component/sendFunds/requestfund'));
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/state_dept" exact component={state_dept} />
 					<Route path="/sendFunds" exact component={sendFunds} />
 					<Route path="/Navbar" exact component={Navbar}/>
+					<Route path="/requestFunds" exact component={requestFunds}/>
 				</Switch>
 			</Suspense>
 		</Router>
