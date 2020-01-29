@@ -5,14 +5,14 @@ const departmentview = lazy(() => import('./component/department/departmentview'
 const schemeview = lazy(() => import('./component/schemes/schemeview'));
 const state_dept = lazy(() => import('./component/state_dept/state_dept'));
 const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
-const state = lazy(() => import('./component/states/state'));
+
 
 function App() {
 	return (
 		<Router>
 			<Suspense fallback={<div>Loading...</div>}>
 				<Switch>
-					<Route path="/" exact component={state} />
+					<Route path="/" exact component={home} />
 					<Route path="/department" exact component={departmentview} />
 					<Route path="/schemes" exact component={schemeview} />
 					<Route path="/state_dept" exact component={state_dept} />

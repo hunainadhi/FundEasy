@@ -1,42 +1,74 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import './department.css';
 import Department from './department';
 import Navbar from '../Navbar/Navbar';
-class departmentview extends Component {
+import {
+    InputGroup,
+    InputGroupButtonDropdown,
+    Input,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
 
-    constructor(props) {
-        super(props)
+const Departmentview = (props) => {
+    const [list, setlist] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [splitButtonOpen, setSplitButtonOpen] = useState(false);
+    const [state,usestate] = useState('State');
 
-        this.state = {
-            list: [],
+    const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
 
-        }
-    }
+    const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
 
-
-    componentDidMount() {
+    useEffect(() => {
         fetch('http://localhost:5000/department/', {
             method: 'GET'
         })
             .then(res => res.json())
             .then(data => {
-                this.setState({ list: [...this.state.list, ...data.message] });
-                console.log(this.state.list.map(val => val))
+                setlist(data.message);
+                console.log(list.map(val => val))
             });
-    }
+    }, [])
 
-    render() {
-        return (
-            <div>
-                <Navbar />
-                <center>
+    return (
+        <div>
+            <Navbar />
+           
+            <center>
                     <h2>DEPARTMENTS</h2>
-                </center>
+                
+            <div>
+                <InputGroup className="department-input">
+                    <InputGroupButtonDropdown addonType="append" isOpen={dropdownOpen} toggle={toggleDropDown}>
+                        <DropdownToggle className="dropdown-state" caret>
+                            {state}
+                            </DropdownToggle>
+                        <DropdownMenu >
+                            <DropdownItem header>choose state..</DropdownItem>
+                            <DropdownItem onClick={()=>usestate((state)=>{usestate("MAHARASHTRA")})}>MAHARASHTRA</DropdownItem>
+                            <DropdownItem onClick={()=>usestate((state)=>{usestate("GUJRAT")})}>GUJRAT</DropdownItem>
+                            <DropdownItem onClick={()=>usestate((state)=>{usestate("TELANGANA")})}>TELANGANA</DropdownItem>
+                        </DropdownMenu>
+                    </InputGroupButtonDropdown>
+                    <Input placeholder="Search Department" />
+                </InputGroup>
+                <br />
+
+            </div>
+            </center>
+            <div>
+            { /*
+               
                 {this.state.list.map((val, index) => (
                     <Department key={val.DeptID} name={val.name} deptid={val.DeptID} />
                 ))}
+                */}
             </div>
-        );
+        </div>
+    );
 
-    }
 }
-export default departmentview;
+
+export default Departmentview;
