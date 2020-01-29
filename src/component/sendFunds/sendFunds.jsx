@@ -162,8 +162,7 @@ const SendFunds = () => {
         })
     }
     function updateBalance() {
-        let bal = balance;
-        $('#balance').html(bal);
+        $('#balance').html(balance);
     }
 
     window.setInterval(function () {
@@ -179,10 +178,10 @@ const SendFunds = () => {
     function getTransactions() {
         var notifs;
         contract.methods.getLength().call().then(function (length) {
-            if (newLen != length) {
+            if (newLen !== length) {
                 for (let transid = newLen; transid < length; transid++) {
                     contract.methods.transactions(transid).call((err, trans) => {
-                        if (trans && trans.receiver == receiver1) {
+                        if (trans && trans.receiver === receiver1) {
                             notifs = $('#notifs').html();
                             notifs += trans.sender + ' ' + trans.receiver + ' ' +timeConverter(trans.timestamp) +' ' + trans.amount +' ' + trans.scheme+'<br>';
                             $('#notifs').html(notifs);
@@ -196,7 +195,7 @@ const SendFunds = () => {
     }
 
     function track() {
-        var track;
+        let track;
         contract.methods.getLength().call().then(function (length) {
             if (newLen != length) {
                 for (let transid = newLen; transid < length; transid++) {
@@ -215,7 +214,6 @@ const SendFunds = () => {
     }
 
     function genReport() {
-        var report = new Array();
         var tableHeaders = ["Date", "Sender", "Receiver", "Scheme", "Amount"];
         let csvContent = "data:text/csv;charset=utf-8,";
         let row = tableHeaders.join(",");
@@ -235,9 +233,10 @@ const SendFunds = () => {
                     })
                 ));
             }
-            var callCsv = setInterval(checkCsv, 1000);
+            let callCsv = setInterval(checkCsv, 1000);
+
             function checkCsv() {
-                if (i == length) {
+                if (i === length) {
                     clearInterval(callCsv);
                     downloadCsv(csvContent);
                 }
@@ -355,24 +354,31 @@ const SendFunds = () => {
 
     return (
         <div className={"sendForm"} onLoad={() => {startApp()}}>
-            <Navbar />
-            <center>
-                <h2 id='senderId'>Sender: Central Government</h2><br/>
-                <h4 id='deptId'>Receiver: National Health Department</h4><br/>
-                <h5 id='schemeId'>Universal Health Insurance Scheme</h5><br/>
-                <input type="number" placeholder={"Enter Amount:"} id="amt" min='1' step="1" />
-                {/*<input type="email" placeholder={"Enter Destination email:"} id="destMail"/>*/}
-                <button type="submit" className="button1" onClick={sendTransaction}>SEND</button>
-                <br/><br/>
-                <p id='balance'> </p><br/>
-                <button onClick={genReport}>Generate report</button>
-                <br/><br/>
-                <br/>
-                Notifications:
-                <p id='notifs'> </p>
-                <br/>
-            </center>
+            <Navbar/>
+            <div className={"scheme"}><br/><br/>
+                <center>
+                    <h2 id='schemeId'>UNIVERSAL HEALTH INSURANCE SCHEME</h2><br/><br/>
+                    <p id={'desc'}>The Universal Health Insurance Scheme covers medical expenses, provides a personal accident cover to the primary breadwinner of the family, and offers compensation to the family if the earning member passes away. Universal Health Insurance Scheme is offered to Indians by the Indian Government. Both APL (Above poverty Line) and BPL (Below Poverty Line) families can apply for this scheme.</p>
+                    <br/><br/><input type="number" placeholder={"Enter Amount"} id="amt" min='1' step="1" />
+                    <button type="submit" className="button1" onClick={sendTransaction}>SEND</button>
+                </center>
+            </div>
+            <div className={"history"}>
+                <div id={"hist"}><center>HISTORY</center></div><br/>
+                <div id={"prev"}>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  25th January 2019 : 50000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  21th October 2018 : 40000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  17th July 2018 : 45000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  22th April 2018 : 30000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  27th January 2018 : 40000</div><br/>
+                </div>
+            </div>
+            <div className={"footer"}>
+                <p className={"contact"}>Contact : 00001111 </p>
+                <p className={"email"}>Incase of any query, contact us at : support@gmail.com </p>
+            </div>
         </div>
+
     );
 };
 

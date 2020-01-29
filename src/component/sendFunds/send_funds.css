@@ -1,22 +1,87 @@
 .sendForm{
-    margin-left: 40px auto;
+    margin: 0 auto;
     display: block;
     align-content: center;
 }
 input{
-    width:500px;
-    height: 40px;
+    width:700px;
+    height: 55px;
     padding: 5px;
     margin: 10px;
+    border: 3px #EA4B32 solid;
+    outline: none;
+    font-size: 20px;
 }
 .button1{
-    width:70px;
-    height:40px;
+    width:100px;
+    height:55px;
     border: none;
-    background: cornflowerblue;
+    background: #EA4B32;
     color:white;
-    border-radius:5px;
+    font-weight: bold;
+    font-size: 23px;
+    margin-left: 10px;
+    outline: none;
 }
 .balanc{
+    font-size: 20px;
+}
+#schemeId{
+    font-size: 40px;
+    background: #EA4B32;
+    width: 850px;
+    height: 60px;
+    color: white;
+    border-radius: 10px;
+    line-height: 55px;
+}
+#desc{
+    margin-left: 70px;
+    font-size: 25px;
+    text-align: justify;
+}
+.history{
+    border: 2px solid #EA4B32;
+    height: 380px;
+    width: 360px;
+    float: right;
+    margin-right: 50px;
+    margin-top: -435px;
+}
+.scheme{
+    width: 1100px;
+}
+.footer{
+    width: 100%;
+    height: 60px;
+    background: black;
+    position: fixed;
+    bottom: 0;
+}
+.contact{
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 120px;
+}
+.email{
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 930px;
+    margin-top: -50px;
+}
+#hist{
+    background: #EA4B32;
+    color: white;
+    font-weight: bold;
+    width: 360px;
+    height: 40px;
+    font-size: 25px;
+}
+#prev{
+    margin-left: 10px;
     font-size: 20px;
 }
