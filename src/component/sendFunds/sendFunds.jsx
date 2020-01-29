@@ -6,10 +6,9 @@ import Swal from 'sweetalert2';
 import Navbar from '../Navbar/Navbar';
 
 const sendFunds = () => {
-    let senderId, receiverId, schemeId, receiver1,receiver2,receiver3, contract,newLen;
+    let senderId, receiverId, schemeId, receiver1, receiver2, receiver3, contract, newLen, balance;
 
     function startApp() {
-
         let abi = [
             {
                 "constant": false,
@@ -120,7 +119,7 @@ const sendFunds = () => {
                 "type": "function"
             }
         ];
-        let fundsAddress = "0x7Ad7F110493CF073cD4611a9A18Bcd2349371dcf";
+        let fundsAddress = "0x82B32B5230E7D37c45c37f4ccCA0374B0180DB3f";
         let web3 = new Web3('http://localhost:8545');
         contract = new web3.eth.Contract(abi, fundsAddress);
         senderId = "0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee";
@@ -129,45 +128,49 @@ const sendFunds = () => {
         receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
         newLen = 0;
         schemeId = "Universal Health Insurance Scheme";
+
     }
     startApp();
     function timeConverter(unixTimestamp) {
-        var options = {day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'};
+        var options = { day: '2-digit', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
         var dateObj = new Date(unixTimestamp * 1000);
-        return dateObj.toLocaleString('en-US', options);
+        return dateObj.toLocaleString('en-IN', options).replace(/,/g, "");
     }
     function getBalance() {
         senderId = '0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee';
         contract.methods.balanceOf(senderId).call().then(function (bal) {
-            $('#balance').html(bal);
+            balance = bal;
         })
     }
+    function updateBalance() {
+        let bal = balance;
+        $('#balance').html(bal);
+    }
+
     window.setInterval(function () {
         getBalance();
+        updateBalance();
         getTransactions();
         track();
     }, 100);
 
     function wait(time) {
-        for (let i = 0; i < time; i++){
-        }
+        for (let i = 0; i < time; i++);
     }
     function getTransactions() {
         var notifs;
         contract.methods.getLength().call().then(function (length) {
             if (newLen != length) {
-                notifs+='<table border="1">'
                 for (let transid = newLen; transid < length; transid++) {
                     contract.methods.transactions(transid).call((err, trans) => {
                         if (trans && trans.receiver == receiver1) {
                             notifs = $('#notifs').html();
-                            notifs += '<tr><td>'+trans.sender+'</td><td>'+ '</td>&nbsp;<td>' + trans.receiver + '</td><td>' + timeConverter(trans.timestamp) + '</td><td>' + trans.amount + '</td><td>' + trans.scheme + '</td></tr>';
+                            notifs += trans.sender + ' ' + trans.receiver + ' ' +timeConverter(trans.timestamp) +' ' + trans.amount +' ' + trans.scheme+'<br>';
                             $('#notifs').html(notifs);
                         }
                     });
                     wait(10000000);
                 }
-                notifs+='</table>';
                 newLen = length;
             }
         })
@@ -180,7 +183,7 @@ const sendFunds = () => {
                 for (let transid = newLen; transid < length; transid++) {
                     contract.methods.transactions(transid).call((err, trans) => {
                         if (trans && trans.scheme == schemeId) {
-                            track = $('#notifs').html();
+                            track = $('#track').html();
                             track += trans.sender + '&nbsp;&nbsp;' + trans.receiver + '&nbsp;&nbsp;' + timeConverter(trans.timestamp) + '&nbsp;&nbsp;' + trans.amount + '&nbsp;&nbsp;' + trans.scheme + '<br>';
                             $('#track').html(track);
                         }
@@ -191,16 +194,99 @@ const sendFunds = () => {
             }
         })
     }
+
+    function genReport() {
+        var report = new Array();
+        var tableHeaders = ["Date", "Sender", "Receiver", "Scheme", "Amount"];
+        let csvContent = "data:text/csv;charset=utf-8,";
+        let row = tableHeaders.join(",");
+        csvContent += row + "\r\n";
+        contract.methods.getLength().call().then(function (length) {
+            var i = 0;
+            for (let transid = 0, p = Promise.resolve(); transid < length; transid++) {
+                p = p.then(_ => new Promise(resolve =>
+                    contract.methods.transactions(transid).call().then(function (trans) {
+                        if (trans) {
+                            let trow = [timeConverter(trans.timestamp), hashToName(trans.sender), hashToName(trans.receiver), trans.scheme, trans.amount];
+                            let row = trow.join(",");
+                            csvContent += row + "\r\n";
+                            resolve();
+                            i++;
+                        }
+                    })
+                ));
+            }
+            var callCsv = setInterval(checkCsv, 1000);
+            function checkCsv() {
+                if (i == length) {
+                    clearInterval(callCsv);
+                    downloadCsv(csvContent);
+                }
+            }
+        })
+    }
+    function downloadCsv(csvContent) {
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.style.display = 'none';
+        link.setAttribute("download", "Funds Report.csv");
+        link.innerHTML = "Click Here to download";
+        document.body.appendChild(link);
+
+        link.click();
+        link.remove();
+    }
+    function hashToName(address) {
+        let deptName;
+
+        return deptName;
+    }
+    function nameToHash(id) {
+        let address;
+
+        return address;
+    }
+    function sendEmail(amount,dept,scheme,email) {
+        var nodemailer = require('nodemailer');
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'kbohra89@gmail.com',
+                pass: 'rabtizaebvftujgd'
+            }
+        });
+
+        var mailOptions = {
+            from: 'kbohra89@gmail.com',
+            to: email,
+            subject: 'Notification about Fund Receipt',
+            body: "Dear Officer,<br><br>" + dept + " has received " + amount + " for " + scheme,
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+
     function sendTransaction() {
         var receiver, userAccount;
         var amt = $('#amt').val();
         var scheme = $('#schemeId').html();
+        var deptName = 'National Health Department';
+        var schemeName = 'Health For All';
+        var email = 'npd@somaiya.edu';
         function getData() {
             receiver = '0xC94a06CaC980aedD3246fb4296589BA932EeA5F3';
             userAccount = '0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee';
-            if (amt > 0 && !isNaN(amt)) {
+            if (amt > 0 && !isNaN(amt) && (balance - amt) >= 0) {
+                $('#amt').val('');
                 Swal.fire({
-                    title: 'Sending the money...',
+                    title: 'Sending the funds...',
                     timerProgressBar: true,
                     onBeforeOpen: () => {
                         Swal.showLoading()
@@ -208,13 +294,21 @@ const sendFunds = () => {
                 });
                 return contract.methods.transferFunds(receiver, amt, scheme)
                     .send({ from: userAccount })
-                    .on("receipt", function (receipt) {
-                        Swal.fire({
-                                icon:'success',
-                                title:'Yayyy!!!',
-                                text:'Successfully sent money to National Health Department!'
-                            }
-                        );
+                    .once('transactionHash',function(hash){
+                        console.log(hash);
+                    })
+                    .on('receipt', function (receipt) {
+                        if (receipt) {
+                            updateBalance();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Funds Disbursed',
+                                text: 'Successfully sent money to ' + hashToName(receiver) + '!'
+                            })
+                                .then(function (){
+                                    sendEmail(amt,deptName,schemeName,email)
+                                });
+                        }
                     })
                     .on("error", function (error) {
                         Swal.fire({
@@ -223,7 +317,15 @@ const sendFunds = () => {
                             text: error,
                         });
                     });
-            } else {
+            } else if ((balance - amt) < 0) {
+                $('#amt').val('');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Insufficient Balance!'
+                });
+            }
+            else {
                 $('#amt').val('');
                 Swal.fire({
                     icon: 'error',
@@ -234,8 +336,8 @@ const sendFunds = () => {
         }
         getData();
     }
-    return (
 
+    return (
         <div className={"sendForm"} onLoad={() => {startApp()}}>
             <Navbar />
             <center>
@@ -243,18 +345,19 @@ const sendFunds = () => {
                 <h4 id='deptId'>Receiver: National Health Department</h4><br/>
                 <h5 id='schemeId'>Universal Health Insurance Scheme</h5><br/>
                 <input type="number" placeholder={"Enter Amount:"} id="amt" min='1' step="1" />
-                <input type="email" placeholder={"Enter Destination email:"} id="destMail"/>
+                {/*<input type="email" placeholder={"Enter Destination email:"} id="destMail"/>*/}
                 <button type="submit" className="button1" onClick={sendTransaction}>SEND</button>
                 <br/><br/>
-                <div className="balanc">Your Balance Is <p id="balance"></p></div>
+                <p id='balance'> </p><br/>
+                <button onClick={genReport}>Generate report</button>
+                <br/><br/>
                 <br/>
                 Notifications:
-                <p id={'notifs'}></p>
+                <p id='notifs'> </p>
                 <br/>
             </center>
         </div>
     );
-
 };
 
 export default sendFunds;
