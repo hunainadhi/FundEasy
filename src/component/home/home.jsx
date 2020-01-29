@@ -7,6 +7,7 @@ function home(props) {
     {
       <NavigationHome/>
     }
+    
     </div>
   );
 }

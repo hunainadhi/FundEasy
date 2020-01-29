@@ -22,3 +22,11 @@ h2{
     margin:70px auto 0 auto;
     padding: 0;
 }
+.department-input{
+    width: 500px;
+}
+.dropdown-state{
+    width: 200px;
+    margin-right: 10%;
+    
+}
