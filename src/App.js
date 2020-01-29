@@ -21,7 +21,7 @@ function App() {
 					<Route path="/schemes" exact component={schemeview} />
 					<Route path="/state_dept" exact component={state_dept} />
 					<Route path="/AddModify" exact component={AddModify} />
-					<Route path="/Navbar" exact component={home} />					
+					<Route path="/Navbar" exact component={Navbar} />					
 					<Route path="/sendFunds" exact component={sendFunds} />
 					<Route path="/Navbar" exact component={Navbar}/>
 					<Route path="/requestFunds" exact component={requestFunds}/>

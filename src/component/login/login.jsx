@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './login.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import Department from '../department/departmentview';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import Swal from 'sweetalert2';
