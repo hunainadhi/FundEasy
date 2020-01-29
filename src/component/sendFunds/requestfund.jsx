@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Swal from 'sweetalert2';
 import Navbar from '../Navbar/Navbar';
 import { UserContext } from '../../UserContext';
+import {Button} from 'reactstrap'
 
 const RequestFunds = () => {
     let senderId, receiverId, schemeId, receiver1, receiver2, receiver3, contract, newLen, balance;
@@ -41,7 +42,8 @@ const RequestFunds = () => {
                 <center>
                     <h2 id='schemeId'>{refund.scheme}</h2><br/><br/>
                     <p id={'desc'}>The Universal Health Insurance Scheme covers medical expenses, provides a personal accident cover to the primary breadwinner of the family, and offers compensation to the family if the earning member passes away. Universal Health Insurance Scheme is offered to Indians by the Indian Government. Both APL (Above poverty Line) and BPL (Below Poverty Line) families can apply for this scheme.</p>
-                    <button type="submit" className="button1" onClick={sendEmail}>Request</button>
+                    <br></br>
+                    <Button type="submit" className="button1" onClick={sendEmail}>Request</Button>
                 </center>
             </div>
             <div className={"history"}>
