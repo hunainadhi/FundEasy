@@ -1,10 +1,10 @@
 import React from 'react';
-import Login from '../login/login';
+import NavHome from '../NavHome/NavHome';
 function home(props) {
   return (
     <div >
     
-      <Login/>
+      <NavHome />
     
     </div>
   );
