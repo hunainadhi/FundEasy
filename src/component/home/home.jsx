@@ -1,12 +1,10 @@
 import React from 'react';
-import Navigation from '../Navbar/Navbar';
-
+import Login from '../login/login';
 function home(props) {
   return (
     <div >
-    {
-      <Navigation/>
-    }
+    
+      <Login/>
     
     </div>
   );

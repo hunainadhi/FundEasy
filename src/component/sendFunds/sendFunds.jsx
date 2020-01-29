@@ -1,12 +1,31 @@
-import React from 'react';
+import React,{useContext, useState, useEffect} from 'react';
 import './send_funds.css';
 import Web3 from 'web3';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
 import Navbar from '../Navbar/Navbar';
+import { UserContext } from '../../UserContext';
 
-const sendFunds = () => {
+const SendFunds = () => {
     let senderId, receiverId, schemeId, receiver1, receiver2, receiver3, contract, newLen, balance;
+    const [user, setUser]  = useContext(UserContext);
+    useEffect(()=>{
+        fetch('http://localhost:5000/user/login', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setUser(user);
+                console.log(data);
+                if (data.Token) {
+                    console.log(data);
+                }
+            });
+    },[])
 
     function startApp() {
         let abi = [
@@ -123,9 +142,9 @@ const sendFunds = () => {
         let web3 = new Web3('http://localhost:8545');
         contract = new web3.eth.Contract(abi, fundsAddress);
         senderId = "0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee";
-        receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
-        receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
-        receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
+       // receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
+        //receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
+        //receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
         newLen = 0;
         schemeId = "Universal Health Insurance Scheme";
 
@@ -143,8 +162,7 @@ const sendFunds = () => {
         })
     }
     function updateBalance() {
-        let bal = balance;
-        $('#balance').html(bal);
+        $('#balance').html(balance);
     }
 
     window.setInterval(function () {
@@ -160,10 +178,10 @@ const sendFunds = () => {
     function getTransactions() {
         var notifs;
         contract.methods.getLength().call().then(function (length) {
-            if (newLen != length) {
+            if (newLen !== length) {
                 for (let transid = newLen; transid < length; transid++) {
                     contract.methods.transactions(transid).call((err, trans) => {
-                        if (trans && trans.receiver == receiver1) {
+                        if (trans && trans.receiver === receiver1) {
                             notifs = $('#notifs').html();
                             notifs += trans.sender + ' ' + trans.receiver + ' ' +timeConverter(trans.timestamp) +' ' + trans.amount +' ' + trans.scheme+'<br>';
                             $('#notifs').html(notifs);
@@ -177,7 +195,7 @@ const sendFunds = () => {
     }
 
     function track() {
-        var track;
+        let track;
         contract.methods.getLength().call().then(function (length) {
             if (newLen != length) {
                 for (let transid = newLen; transid < length; transid++) {
@@ -196,7 +214,6 @@ const sendFunds = () => {
     }
 
     function genReport() {
-        var report = new Array();
         var tableHeaders = ["Date", "Sender", "Receiver", "Scheme", "Amount"];
         let csvContent = "data:text/csv;charset=utf-8,";
         let row = tableHeaders.join(",");
@@ -216,9 +233,10 @@ const sendFunds = () => {
                     })
                 ));
             }
-            var callCsv = setInterval(checkCsv, 1000);
+            let callCsv = setInterval(checkCsv, 1000);
+
             function checkCsv() {
-                if (i == length) {
+                if (i === length) {
                     clearInterval(callCsv);
                     downloadCsv(csvContent);
                 }
@@ -248,29 +266,26 @@ const sendFunds = () => {
         return address;
     }
     function sendEmail(amount,dept,scheme,email) {
-        var nodemailer = require('nodemailer');
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'kbohra89@gmail.com',
-                pass: 'rabtizaebvftujgd'
-            }
-        });
-
-        var mailOptions = {
-            from: 'kbohra89@gmail.com',
-            to: email,
-            subject: 'Notification about Fund Receipt',
-            body: "Dear Officer,<br><br>" + dept + " has received " + amount + " for " + scheme,
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
+        const notification = {
+		//sender: req.body.sender,
+		receiver: email,
+		amount: amount,
+		time: Date(),
+		schemeID:scheme,
+        }
+        fetch('http://localhost:5000/notification', {
+				method: 'POST',
+				body: JSON.stringify(notification),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+				
+				});
+        
     }
 
     function sendTransaction() {
@@ -339,25 +354,37 @@ const sendFunds = () => {
 
     return (
         <div className={"sendForm"} onLoad={() => {startApp()}}>
-            <Navbar />
-            <center>
-                <h2 id='senderId'>Sender: Central Government</h2><br/>
-                <h4 id='deptId'>Receiver: National Health Department</h4><br/>
-                <h5 id='schemeId'>Universal Health Insurance Scheme</h5><br/>
-                <input type="number" placeholder={"Enter Amount:"} id="amt" min='1' step="1" />
-                {/*<input type="email" placeholder={"Enter Destination email:"} id="destMail"/>*/}
-                <button type="submit" className="button1" onClick={sendTransaction}>SEND</button>
-                <br/><br/>
-                <p id='balance'> </p><br/>
-                <button onClick={genReport}>Generate report</button>
-                <br/><br/>
-                <br/>
-                Notifications:
-                <p id='notifs'> </p>
-                <br/>
-            </center>
+            <Navbar/>
+            <div className={"scheme"}><br/><br/>
+                <center>
+                    <h2 id='schemeId'>UNIVERSAL HEALTH INSURANCE SCHEME</h2><br/><br/>
+                    <p id={'desc'}>The Universal Health Insurance Scheme covers medical expenses, provides a personal accident cover to the primary breadwinner of the family, and offers compensation to the family if the earning member passes away. Universal Health Insurance Scheme is offered to Indians by the Indian Government. Both APL (Above poverty Line) and BPL (Below Poverty Line) families can apply for this scheme.</p>
+                    <br/><br/><input type="number" placeholder={"Enter Amount"} id="amt" min='1' step="1" />
+                    <button type="submit" className="button1" onClick={sendTransaction}>SEND</button>
+                </center>
+            </div>
+            <div className={"history"}>
+                <div id={"hist"}><center>HISTORY</center></div><br/>
+                <div id={"prev"}>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  25th January 2019 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>50000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  21th October 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>40000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  17th July 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>45000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  22th April 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>30000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  27th January 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>40000</div><br/>
+                </div>
+            </div>
+            <div className={"footer"}>
+                <p className={"contact"}>Contact : 00001111 </p>
+                <p className={"email"}>Incase of any query, contact us at : support@gmail.com </p>
+            </div>
         </div>
+
     );
 };
 
-export default sendFunds;
+export default SendFunds;
