@@ -5,6 +5,7 @@ function home(props) {
     <div >
     {//Midhi your job will be in home component}
     }
+    
     </div>
   );
 }
