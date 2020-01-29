@@ -366,11 +366,16 @@ const SendFunds = () => {
             <div className={"history"}>
                 <div id={"hist"}><center>HISTORY</center></div><br/>
                 <div id={"prev"}>
-                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  25th January 2019 : 50000</div><br/>
-                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  21th October 2018 : 40000</div><br/>
-                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  17th July 2018 : 45000</div><br/>
-                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  22th April 2018 : 30000</div><br/>
-                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  27th January 2018 : 40000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  25th January 2019 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>50000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  21th October 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>40000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  17th July 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>45000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  22th April 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>30000</div><br/>
+                    <div><i className="fa fa-arrow-right" aria-hidden="true"></i>  27th January 2018 :  <i
+                        className="fa fa-inr" aria-hidden="true"></i>40000</div><br/>
                 </div>
             </div>
             <div className={"footer"}>
