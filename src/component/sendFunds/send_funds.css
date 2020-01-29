@@ -1,0 +1,22 @@
+.sendForm{
+    margin-left: 40px auto;
+    display: block;
+    align-content: center;
+}
+input{
+    width:500px;
+    height: 40px;
+    padding: 5px;
+    margin: 10px;
+}
+.button1{
+    width:70px;
+    height:40px;
+    border: none;
+    background: cornflowerblue;
+    color:white;
+    border-radius:5px;
+}
+.balanc{
+    font-size: 20px;
+}
