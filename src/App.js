@@ -7,6 +7,7 @@ const state_dept = lazy(() => import('./component/state_dept/state_dept'));
 //const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
 const AddModify = lazy(() => import('./component/AddModify/Add'));
 const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
+const Carousel = lazy(() => import('./component/Carousel/Carousel'));
 const Navbar = lazy(()=> import('./component/Navbar/Navbar'));
 const requestFunds = lazy(() => import('./component/sendFunds/requestfund'));
 
@@ -21,8 +22,9 @@ function App() {
 					<Route path="/schemes" exact component={schemeview} />
 					<Route path="/state_dept" exact component={state_dept} />
 					<Route path="/AddModify" exact component={AddModify} />
-					<Route path="/Navbar" exact component={Navbar} />					
+					<Route path="/Navbar" exact component={home} />
 					<Route path="/sendFunds" exact component={sendFunds} />
+					<Route path="/Carousel" exact component={Carousel} />
 					<Route path="/Navbar" exact component={Navbar}/>
 					<Route path="/requestFunds" exact component={requestFunds}/>
 				</Switch>

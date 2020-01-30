@@ -8,5 +8,5 @@ function home(props) {
     
     </div>
   );
-}
+};
 export default home;
