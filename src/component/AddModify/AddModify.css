@@ -1,19 +1,22 @@
 
 
-.Submit{
+/* .Submit{
     background-color: #EA4B32;
     outline: none;
     border: none;
-}
+} */
 
 .Save{
     background-color: #EA4B32;
     outline: none;
     border: none;
+    width: 40%;
 }
 
 Button{
     font-weight: bold;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .Close{
@@ -21,4 +24,6 @@ Button{
     color: #EA4B32;
     outline: none;
     border: 1px solid #EA4B32;
+    width: 40%;
 }
+

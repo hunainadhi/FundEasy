@@ -3,16 +3,16 @@ import {
     Container, Col, Form,
     FormGroup, Label, Input,
     Button,
-  } from 'reactstrap';
+} from 'reactstrap';
 
 class Addmod extends Component {
-  render() {
-    return (
-        <div>
-            jhdsf
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                jhdsf
+            </div>
+        );
+    }
 }
 
 export default Addmod;

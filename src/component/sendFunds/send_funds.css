@@ -22,6 +22,7 @@ input{
     font-size: 23px;
     margin-left: 10px;
     outline: none;
+    margin-bottom: 1%;
 }
 .balanc{
     font-size: 20px;
@@ -67,7 +68,6 @@ input{
     margin-left: 120px;
 }
 .email{
-    margin-top: 15px;
     color: white;
     font-weight: bold;
     font-size: 20px;

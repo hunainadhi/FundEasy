@@ -40,7 +40,8 @@ const RequestFunds = () => {
                 <center>
                     <h2 id='schemeId'>{refund.scheme}</h2><br /><br />
                     <p id={'desc'}>The Universal Health Insurance Scheme covers medical expenses, provides a personal accident cover to the primary breadwinner of the family, and offers compensation to the family if the earning member passes away. Universal Health Insurance Scheme is offered to Indians by the Indian Government. Both APL (Above poverty Line) and BPL (Below Poverty Line) families can apply for this scheme.</p>
-                    <br></br>
+                    <br/>
+                    <br/><br/><input type="number" placeholder={"Enter Amount"} id="amt" min='1' step="1" />
                     <Button type="submit" className="button1" onClick={sendEmail}>Request</Button>
                 </center>
             </div>
@@ -59,7 +60,6 @@ const RequestFunds = () => {
                 <p className={"email"}>Incase of any query, contact us at : support@gmail.com </p>
             </div>
         </div>
-
     );
 };
 

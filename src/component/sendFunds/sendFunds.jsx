@@ -142,12 +142,11 @@ const SendFunds = () => {
         let web3 = new Web3('http://localhost:8545');
         contract = new web3.eth.Contract(abi, fundsAddress);
         senderId = "0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee";
-       // receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
+        // receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
         //receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
         //receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
         newLen = 0;
         schemeId = "Universal Health Insurance Scheme";
-
     }
     startApp();
     function timeConverter(unixTimestamp) {
@@ -213,48 +212,48 @@ const SendFunds = () => {
         })
     }
 
-    function genReport() {
-        var tableHeaders = ["Date", "Sender", "Receiver", "Scheme", "Amount"];
-        let csvContent = "data:text/csv;charset=utf-8,";
-        let row = tableHeaders.join(",");
-        csvContent += row + "\r\n";
-        contract.methods.getLength().call().then(function (length) {
-            var i = 0;
-            for (let transid = 0, p = Promise.resolve(); transid < length; transid++) {
-                p = p.then(_ => new Promise(resolve =>
-                    contract.methods.transactions(transid).call().then(function (trans) {
-                        if (trans) {
-                            let trow = [timeConverter(trans.timestamp), hashToName(trans.sender), hashToName(trans.receiver), trans.scheme, trans.amount];
-                            let row = trow.join(",");
-                            csvContent += row + "\r\n";
-                            resolve();
-                            i++;
-                        }
-                    })
-                ));
-            }
-            let callCsv = setInterval(checkCsv, 1000);
-
-            function checkCsv() {
-                if (i === length) {
-                    clearInterval(callCsv);
-                    downloadCsv(csvContent);
+    /*    function genReport() {
+            var tableHeaders = ["Date", "Sender", "Receiver", "Scheme", "Amount"];
+            let csvContent = "data:text/csv;charset=utf-8,";
+            let row = tableHeaders.join(",");
+            csvContent += row + "\r\n";
+            contract.methods.getLength().call().then(function (length) {
+                var i = 0;
+                for (let transid = 0, p = Promise.resolve(); transid < length; transid++) {
+                    p = p.then(_ => new Promise(resolve =>
+                        contract.methods.transactions(transid).call().then(function (trans) {
+                            if (trans) {
+                                let trow = [timeConverter(trans.timestamp), hashToName(trans.sender), hashToName(trans.receiver), trans.scheme, trans.amount];
+                                let row = trow.join(",");
+                                csvContent += row + "\r\n";
+                                resolve();
+                                i++;
+                            }
+                        })
+                    ));
                 }
-            }
-        })
-    }
-    function downloadCsv(csvContent) {
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.style.display = 'none';
-        link.setAttribute("download", "Funds Report.csv");
-        link.innerHTML = "Click Here to download";
-        document.body.appendChild(link);
+                let callCsv = setInterval(checkCsv, 1000);
 
-        link.click();
-        link.remove();
-    }
+                function checkCsv() {
+                    if (i === length) {
+                        clearInterval(callCsv);
+                        downloadCsv(csvContent);
+                    }
+                }
+            })
+        }
+        function downloadCsv(csvContent) {
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.style.display = 'none';
+            link.setAttribute("download", "Funds Report.csv");
+            link.innerHTML = "Click Here to download";
+            document.body.appendChild(link);
+
+            link.click();
+            link.remove();
+        }*/
     function hashToName(address) {
         let deptName;
 
@@ -267,25 +266,24 @@ const SendFunds = () => {
     }
     function sendEmail(amount,dept,scheme,email) {
         const notification = {
-		//sender: req.body.sender,
-		receiver: email,
-		amount: amount,
-		time: Date(),
-		schemeID:scheme,
+            //sender: req.body.sender,
+            receiver: email,
+            amount: amount,
+            time: Date(),
+            schemeID:scheme,
         }
         fetch('http://localhost:5000/notification', {
-				method: 'POST',
-				body: JSON.stringify(notification),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-				.then(res => res.json())
-				.then(data => {
-					console.log(data);
-				
-				});
-        
+            method: 'POST',
+            body: JSON.stringify(notification),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+            });
     }
 
     function sendTransaction() {

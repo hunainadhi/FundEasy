@@ -17,6 +17,8 @@ const Login = props => {
 		const user = {
 			email: email,
 			password: password,
+			type:type,
+			DeptID:DeptID,
 		};
 
 		if (user)

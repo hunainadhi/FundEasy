@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 .nav{
-    margin-left: 440px;
+    margin-left:24%;
 }
 
 .Submit{
@@ -37,4 +37,22 @@ Button{
     color: #EA4B32;
     outline: none;
     border: 1px solid #EA4B32;
+}
+
+.Closegen{
+    float: left;
+    left: initial;
+    background-color: white;
+    color: #EA4B32;
+    outline: none;
+    border: 1px solid #EA4B32;
+    /*width: 30%;*/
+}
+
+.Generate{
+    float: left;
+    background-color: #EA4B32;
+    outline: none;
+    border: none;
+    /*width: 30%;*/
 }
