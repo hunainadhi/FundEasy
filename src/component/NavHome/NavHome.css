@@ -14,4 +14,13 @@
 .nav{
     margin-left: 800px;
 }
+.nav-item{
+    color: white;
+    font-weight: bolder;
+}
+#login{
+    font-size: 26px;
+    margin-left: 250%;
+    cursor: pointer;
+}
 

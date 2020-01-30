@@ -3,7 +3,7 @@
     border: none;
     padding: 2%;
     margin-left: 35%;
-    margin-top: 18%;
+    margin-top: 10%;
     border: 1px solid rgba(0, 0, 0, 0.678);
     border-radius: 5px;
     background-color: rgba(8, 32, 99, 0.637);
@@ -13,13 +13,17 @@
 
 input.form-control{
     border:none;
-    border-bottom: 2px solid cornflowerblue;
+    border-bottom: 2px solid #EA4B32;
 }
 h5{
-    color: lavender;
-
+    color: white;
 }
 .btn-info{
-    background-color: white;
-    color:lavender;
+    background-color: #EA4B32;
+    color:white;
+    border: none;
+}
+.btn-info:hover{
+    background: #EA4B32;
+    color: white;
 }

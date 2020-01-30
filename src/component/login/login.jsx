@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import Swal from 'sweetalert2';
-
+import {Modal} from 'react-bootstrap';
 const Login = props => {
 	const [email, setemail] = useState('');
 	const [password, setpass] = useState('');
@@ -69,11 +69,12 @@ if(isloggedin){
 }
 else{ 
 	return (
-		
-		<div className="layout">
-			<h1 style={{ textAlign: 'center', color: 'lavender', fontFamily: 'cursive' }}>LOGIN</h1>
-			<hr />
-			<br />
+		<>
+		{/*// <div className="layout">*/}
+			{/*<h1 style={{ textAlign: 'center', color: 'lavender', fontFamily: 'cursive' }}>LOGIN</h1>*/}
+			{/*<hr />*/}
+			{/*// <br />*/}
+		<Modal.Body>
 			<Form>
 				<FormGroup>
 					<Label>
@@ -85,7 +86,6 @@ else{
 						placeholder="xyz@gmail.com"
 						onChange={(e) => setemail(e.target.value)}
 					/>
-					<br />
 				</FormGroup>
 				<FormGroup>
 					<Label>
@@ -98,13 +98,15 @@ else{
 	
 						onChange={(e) => setpass(e.target.value)}
 					/>
-				</FormGroup>
-				<br />
-				<Button color="info" onClick={() => onsubmit()}>
-					<h5 style={{ color: '#546de5' }}>LOGIN</h5>
-				</Button>
+				</FormGroup><br/>
+				<center>
+					<Button color="info" onClick={() => onsubmit()} style={{width:'100%'}}>
+						<h5 style={{ color: 'white' }}>LOGIN</h5>
+					</Button>
+				</center>
 			</Form>
-		</div>
+			</Modal.Body>
+		</>
 	);
 }
 };
