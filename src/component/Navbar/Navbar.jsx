@@ -3,6 +3,7 @@ import { Collapse, Navbar,Button, NavbarToggler, NavbarBrand, Nav, NavItem,  Nav
 import {Modal} from 'react-bootstrap';
 import Notification from '../Notification/Notification';
 import  Add from '../AddModify/Add';
+import Modify from '../AddModify/Modify';
 import './Navbar.css';
 
 const Navigation = props => {
@@ -10,8 +11,12 @@ const Navigation = props => {
 	const [collapsed, setCollapsed] = useState(true);
 	
 	const [show,setShow] = useState(false);
+	const[modify,setModify]=useState(false);
+
 	const handleClose = () => setShow(false);
   	const handleShow = () => setShow(true);
+	const modifyClose=()=>setModify(false);
+	const modifyShow=()=>setModify(true);
 
 	const toggleNavbar = () => setCollapsed(!collapsed);
 
@@ -35,6 +40,11 @@ const Navigation = props => {
 								Add Scheme
 							</NavLink>
 						</NavItem>
+						<NavItem onClick={modifyShow}>
+							<NavLink style={{ color: 'white' }} >
+								Modify Scheme
+							</NavLink>
+						</NavItem>
 						<NavItem>
 							<NavLink style={{ color: 'white' }} href="/">
 								Generate Report
@@ -49,19 +59,12 @@ const Navigation = props => {
 				</Collapse>
 			</Navbar>
 
-	
 			<Modal show={show} onHide={handleClose}>
-				<Add/>
-				<Modal.Footer>
-					<Button className="Close" variant="secondary" onClick={handleClose}>
-						CLOSE
-					</Button>
-					<Button className="Save" variant="primary" onClick={handleClose}>
-						SAVE
-					</Button>
-				</Modal.Footer>
+				<Add className="Add" close={handleClose}/>
+			</Modal >
+			<Modal show={modify} onHide={modifyClose}>
+				<Modify className="Modify" close={modifyClose}/>
 			</Modal>
-
 		</div>
 	);
 };

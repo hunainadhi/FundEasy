@@ -33,8 +33,12 @@ const Example = (props) => {
                   <Label for="exampleText">Description</Label>
                   <Input type="textarea" name="Description" id="Description" />
                 </FormGroup>
-              
-                <Button className="Submit">SUBMIT</Button>
+                <Button className="Close" variant="secondary" onClick={props.close}>
+                  CLOSE
+                </Button>
+                <Button className="Save" variant="primary" onClick={props.close}>
+                  MODIFY
+                </Button>
             </Form>
 				</Modal.Body>
 			

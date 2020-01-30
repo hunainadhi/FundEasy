@@ -33,8 +33,13 @@ const Example = (props) => {
                   <Label for="exampleText">Description</Label>
                   <Input type="textarea" name="Description" id="Description" />
                 </FormGroup>
-              
-                <Button className="Submit">SUBMIT</Button>
+                <Button className="Close" variant="secondary" onClick={props.close}>
+						      CLOSE
+                </Button>
+                <Button className="Save" variant="primary" onClick={props.close}>
+                  ADD
+                </Button>
+                
             </Form>
 				</Modal.Body>
 			
@@ -51,3 +56,14 @@ export default Example;
   //         Check me out
   //       </Label>
   //     </FormGroup>
+
+
+  // <Button className="Submit">SUBMIT</Button>
+
+
+// <Button className="Close" variant="secondary" onClick={handleClose}>
+// 						CLOSE
+// 					</Button>
+// 					<Button className="Save" variant="primary" onClick={handleClose}>
+// 						SAVE
+// 					</Button>
