@@ -134,9 +134,6 @@ function generateReport() {
 	let web3 = new Web3('http://localhost:8545');
 	contract = new web3.eth.Contract(abi, fundsAddress);
 	senderId = "0xCca7560Aa7362F49F3E3bA3CC6f248f6d34900Ee";
-	// receiver1 = "0xC94a06CaC980aedD3246fb4296589BA932EeA5F3";
-	//receiver2 = '0x4A746fe073C1B1e024B96e1D4bB435f51aC7541a';
-	//receiver3 = '0x96aFC09b5b54c083E3B0Bf2bDe4A62cfD6c10508';
 	newLen = 0;
 	schemeId = "Universal Health Insurance Scheme";
 
@@ -184,20 +181,15 @@ function downloadCsv(csvContent) {
 const Navigation = props => {
 	const [collapsed, setCollapsed] = useState(true);
 	const [show,setShow] = useState(false);
-<<<<<<< HEAD
 	const[modify,setModify]=useState(false);
 
-	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
 	const modifyClose=()=>setModify(false);
 	const modifyShow=()=>setModify(true);
-=======
 	const [generate,setGenerate]=useState(false);
 	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
+	const handleShow = () => setShow(true);
 	const generateClose=()=>setGenerate(false);
 	const generateShow=()=>setGenerate(true);
->>>>>>> b10ed9afbb4dcba73fd53f132c8e581ef282690c
 
 	const toggleNavbar = () => setCollapsed(!collapsed);
 
@@ -221,18 +213,13 @@ const Navigation = props => {
 								Add Scheme
 							</NavLink>
 						</NavItem>
-<<<<<<< HEAD
 						<NavItem onClick={modifyShow}>
 							<NavLink style={{ color: 'white' }} >
 								Modify Scheme
 							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink style={{ color: 'white' }} href="/">
-=======
-						<NavItem onClick={generateShow}>
-							<NavLink style={{ color: 'white' }} >
->>>>>>> b10ed9afbb4dcba73fd53f132c8e581ef282690c
+							<NavLink style={{ color: 'white' }} onClick={generateShow}>
 								Generate Report
 							</NavLink>
 						</NavItem>
@@ -244,19 +231,12 @@ const Navigation = props => {
 					</Nav>
 				</Collapse>
 			</Navbar>
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> b10ed9afbb4dcba73fd53f132c8e581ef282690c
 			<Modal show={show} onHide={handleClose}>
 				<Add className="Add" close={handleClose}/>
 			</Modal >
 			<Modal show={modify} onHide={modifyClose}>
 				<Modify className="Modify" close={modifyClose}/>
 			</Modal>
-<<<<<<< HEAD
-=======
 
 			<Modal show={generate} onHide={generateClose}>
 				<Modal.Header closeButton>
@@ -271,8 +251,6 @@ const Navigation = props => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-
->>>>>>> b10ed9afbb4dcba73fd53f132c8e581ef282690c
 		</div>
 	);
 };

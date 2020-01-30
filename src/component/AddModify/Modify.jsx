@@ -4,48 +4,46 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {Modal} from 'react-bootstrap';
 
 const Example = (props) => {
-<<<<<<< HEAD
-  return (
-    <>
-        <Modal.Header closeButton>
-					<Modal.Title>Modify Scheme</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-            <Form >
-                <FormGroup>
-                  <Label for="schemeid">Scheme Id</Label>
-                  <Input type="text" name="schemeId" id="schemeId"/>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="schemename">Scheme Name</Label>
-                  <div className="ab"><Input type="text" name="schemename" id="schemename" placeholder="Enter Scheme name" /></div>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="dept">Select Department</Label>
-                  <Input type="select" name="Department" id="Department" >
-                  <option>Finance Department</option>
-                  <option>Health Department</option>
-                  <option>Energy Department</option>
-                  <option>Food Department</option>
-                  <option>Defence Department</option>
-                  </Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="exampleText">Description</Label>
-                  <Input type="textarea" name="Description" id="Description" />
-                </FormGroup>
-                <Button className="Close" variant="secondary" onClick={props.close}>
-                  CLOSE
-                </Button>
-                <Button className="Save" variant="primary" onClick={props.close}>
-                  MODIFY
-                </Button>
-            </Form>
-				</Modal.Body>
-			
-      </>
-  );
-=======
+    return (
+        <>
+            <Modal.Header closeButton>
+                <Modal.Title>Modify Scheme</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form >
+                    <FormGroup>
+                        <Label for="schemeid">Scheme Id</Label>
+                        <Input type="text" name="schemeId" id="schemeId"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="schemename">Scheme Name</Label>
+                        <div className="ab"><Input type="text" name="schemename" id="schemename" placeholder="Enter Scheme name" /></div>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="dept">Select Department</Label>
+                        <Input type="select" name="Department" id="Department" >
+                            <option>Finance Department</option>
+                            <option>Health Department</option>
+                            <option>Energy Department</option>
+                            <option>Food Department</option>
+                            <option>Defence Department</option>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleText">Description</Label>
+                        <Input type="textarea" name="Description" id="Description" />
+                    </FormGroup>
+                    <Button className="Close" variant="secondary" onClick={props.close}>
+                        CLOSE
+                    </Button>
+                    <Button className="Save" variant="primary" onClick={props.close}>
+                        MODIFY
+                    </Button>
+                </Form>
+            </Modal.Body>
+
+        </>
+    );
     return (
         <>
             <Modal.Header closeButton>
@@ -82,8 +80,7 @@ const Example = (props) => {
 
         </>
     );
->>>>>>> b10ed9afbb4dcba73fd53f132c8e581ef282690c
-}
+};
 
 export default Example;
 
