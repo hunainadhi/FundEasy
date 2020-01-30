@@ -13,8 +13,7 @@ const Login = props => {
 	 const [DeptID, setdept] = useState('');
 	const [isloggedin,setlog] = useState(false);
 	function onsubmit(){
-		
-		
+
 		const user = {
 			email: email,
 			password: password,

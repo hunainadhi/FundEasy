@@ -19,13 +19,13 @@ const NavigationHome = props => {
 				<NavbarBrand href="/" style={{color:'white'}}>FundEasy</NavbarBrand>
 				{/*<NavbarToggler onClick={toggleNavbar}/>*/}
 				{/*<Collapse isOpen={!collapsed} navbar >*/}
-					<Nav>
-						<NavItem >
-							<NavLink onClick={handleShow} id={"login"} >
-								LOGIN
-							</NavLink>	
-						</NavItem>
-					</Nav>
+				<Nav>
+					<NavItem >
+						<NavLink onClick={handleShow} id={"login"} >
+							LOGIN
+						</NavLink>
+					</NavItem>
+				</Nav>
 				{/*</Collapse>*/}
 			</Navbar>
 			{/*{!	collapsed && <Login/>}*/}
@@ -36,15 +36,12 @@ const NavigationHome = props => {
 				   aria-labelledby="contained-modal-title-vcenter"
 				   centered
 			>
-
 				<Modal.Header  closeButton>
-
 					<Modal.Title id="contained-modal-title-vcenter">
 						LOGIN
 					</Modal.Title>
 				</Modal.Header>
-
-					<Login handle={handleShow} close={handleClose}/>
+				<Login handle={handleShow} close={handleClose}/>
 			</Modal>
 		</div>
 	);
