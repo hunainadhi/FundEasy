@@ -12,12 +12,12 @@ const Example = (props) => {
 				<Modal.Body>
             <Form >
                 <FormGroup>
-                  <Label for="schemename">Scheme Name</Label>
-                  <div className="ab"><Input type="text" name="schemename" id="schemename" placeholder="Enter Scheme name" /></div>
-                </FormGroup>
-                <FormGroup>
                   <Label for="schemeid">Scheme Id</Label>
                   <Input type="text" name="schemeId" id="schemeId"/>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="schemename">Scheme Name</Label>
+                  <div className="ab"><Input type="text" name="schemename" id="schemename" placeholder="Enter Scheme name" /></div>
                 </FormGroup>
                 <FormGroup>
                   <Label for="dept">Select Department</Label>
