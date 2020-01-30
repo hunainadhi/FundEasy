@@ -9,6 +9,8 @@ const Login = props => {
 	const [email, setemail] = useState('');
 	const [password, setpass] = useState('');
 	 const [user, setUser]  = useContext(UserContext);
+	 const [type,settype] = useState('');
+	 const [DeptID, setdept] = useState('');
 	const [isloggedin,setlog] = useState(false);
 	function onsubmit(){
 		
@@ -16,6 +18,8 @@ const Login = props => {
 		const user = {
 			email: email,
 			password: password,
+			type:type,
+			DeptID:DeptID,
 		};
 		
 		if (user)
@@ -28,7 +32,8 @@ const Login = props => {
 			})
 				.then(res => res.json())
 				.then(data => {
-					setUser(user);
+					settype(data.type);
+					setdept(data.DeptID);
 					console.log(data);
 					if (data.Token) {
 						console.log(data);
