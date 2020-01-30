@@ -12,25 +12,26 @@ import {
 } from 'reactstrap';
 
 const Departmentview = (props) => {
-    const [list, setlist] = useState([]);
+    
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-    const [state,usestate] = useState('State');
-
+    const [state,usestate] = useState('');
+    const [department, setdept] = useState([]);
     const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
 
-    const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
-
     useEffect(() => {
-        fetch('http://localhost:5000/department/', {
+        
+        fetch(`http://localhost:5000/department/${state}`, {
             method: 'GET'
         })
             .then(res => res.json())
             .then(data => {
-                setlist(data.message);
-                console.log(list.map(val => val))
+                console.log(data.message);
+                setdept(data.message);
+                console.log(department);
             });
-    }, [])
+            
+            
+    }, [state])
 
     return (
         <div>
@@ -43,7 +44,7 @@ const Departmentview = (props) => {
                 <InputGroup className="department-input">
                     <InputGroupButtonDropdown addonType="append" isOpen={dropdownOpen} toggle={toggleDropDown}>
                         <DropdownToggle className="dropdown-state" caret>
-                            {state}
+                            State
                             </DropdownToggle>
                         <DropdownMenu >
                             <DropdownItem header>choose state..</DropdownItem>
@@ -55,16 +56,15 @@ const Departmentview = (props) => {
                     <Input placeholder="Search Department" />
                 </InputGroup>
                 <br />
-
+            {}
             </div>
             </center>
             <div>
-            { /*
-               
-                {this.state.list.map((val, index) => (
+            {           
+                department.map((val, index) => (
                     <Department key={val.DeptID} name={val.name} deptid={val.DeptID} />
-                ))}
-                */}
+                ))
+                }
             </div>
         </div>
     );
