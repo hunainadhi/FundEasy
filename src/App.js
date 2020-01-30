@@ -4,13 +4,11 @@ const home = lazy(() => import('./component/home/home'));
 const departmentview = lazy(() => import('./component/department/departmentview'));
 const schemeview = lazy(() => import('./component/schemes/schemeview'));
 const state_dept = lazy(() => import('./component/state_dept/state_dept'));
-//const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
 const AddModify = lazy(() => import('./component/AddModify/Add'));
 const sendFunds = lazy(() => import('./component/sendFunds/sendFunds'));
 const Carousel = lazy(() => import('./component/Carousel/Carousel'));
 const Navbar = lazy(()=> import('./component/Navbar/Navbar'));
 const requestFunds = lazy(() => import('./component/sendFunds/requestfund'));
-
 
 function App() {
 	return (
