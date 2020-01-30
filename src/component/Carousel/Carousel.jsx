@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component,useState } from "react";
+import {Modal} from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -31,8 +32,8 @@ function SamplePrevArrow(props) {
     );
 }
 
-export default class Carousel extends Component {
-    render() {
+function Corousel(props){
+
         const settings = {
             dots: true,
             infinite:true,
@@ -41,32 +42,82 @@ export default class Carousel extends Component {
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />
         };
+        const [show, setShow] = useState(false);
+        const handleShow=()=>setShow(true);
+        const handleClose=()=>setShow(false);
+
         return (
+            <>
             <div>
-                <h2> Department of Maharashta </h2>
-                <Slider {...settings}>
-                    <div>
-                        <img src={health}/>
-                        <h3>BKMB</h3>
-                    </div>
-                    <div>
-                        <img src={agri}/>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <img src={swachh}/>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <img src={midday}/>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <img src={household}/>
-                        <h3>5</h3>
-                    </div>
-                </Slider>
+                <div className={"dept"}>
+                    <div className={"dept_name"}><h4> By  <span style={{color:"green",fontSize:"35px"}}> MAHARASHTRA</span> </h4></div>
+                    <Slider {...settings}>
+                        <div className="card" onClick={handleShow} style={{cursor:'pointer'}}>
+                            <img src={health}/>
+                            <h4>Swasthiya Bima Yojana </h4>
+                        </div>
+                        <div>
+                            <img src={agri}/>
+                            <h4>Fasal Bima Yojana</h4>
+                        </div>
+                        <div>
+                            <img src={swachh}/>
+                            <h4>Swachh Bharat Abhiyan</h4>
+                        </div>
+                        <div>
+                            <img src={midday}/>
+                            <h4>Mid-Day Meal Scheme</h4>
+                        </div>
+                        <div>
+                            <img src={household}/>
+                            <h4>Jan Dhan Yojana</h4>
+                        </div>
+                    </Slider>
+                </div><br/><br/>
+
+            <div className={"dept"}>
+            <div className={"dept_name"}><h4> By  <span style={{color:"#9b59b6",fontSize:"32px"}}> GUJARAT</span> </h4></div>
+            <Slider {...settings}>
+            <div>
+                <img src={health}/>
+                <h4>Swasthiya Bima Yojana </h4>
             </div>
-        );
-    }
+            <div>
+                <img src={agri}/>
+                <h4>Fasal Bima Yojana</h4>
+            </div>
+            <div>
+                <img src={swachh}/>
+                <h4>Swachh Bharat Abhiyan</h4>
+            </div>
+            <div>
+                <img src={midday}/>
+                <h4>Mid-Day Meal Scheme</h4>
+            </div>
+            <div>
+                <img src={household}/>
+                <h4>Jan Dhan Yojana</h4>
+            </div>
+        </Slider>
+        </div></div>
+            <Modal show={show} onHide={handleClose}
+                   {...props}
+                   size="md"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Swasthiya Bima Yojana</Modal.Title>
+                 </Modal.Header>
+                <Modal.Body>
+                    Rashtriya Swasthya Bima Yojana is a government-run health insurance programme for the Indian poor.
+                    The scheme aims to provide health insurance coverage to the unrecognised sector workers belonging to the BPL
+                    category and their family members shall be beneficiaries under this scheme.
+                </Modal.Body>
+            </Modal>
+        </>
+
+    );
 }
+
+export default  Corousel;

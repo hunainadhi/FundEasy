@@ -17,7 +17,7 @@ const Notification = props => {
 		<>
 			<Button
 				ref={target}
-				style={{ backgroundColor: 'black', color: 'white', border: 'none', paddingBottom: '0px',marginTop:'3px',fontSize:'20px',marginRight:'30px'}}
+				style={{ backgroundColor: '#EA4B32', color: 'white', border: 'none', paddingBottom: '0px',marginTop:'3px',fontSize:'20px',marginRight:'30px'}}
 				onClick={() => setShow(!show)}>
 				Notification
 			</Button>
